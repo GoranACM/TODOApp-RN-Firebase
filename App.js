@@ -18,13 +18,39 @@ import * as firebase from 'firebase';
 if (!firebase.apps.length) {
   firebase.initializeApp( firebaseConfig );
 }
+// Other imports
+import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>This is my app</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Container style={ styles.container }>
+      <Form>
+        {/* Item from native base with a flating label */}
+        <Item floatingLabel>
+          <Label>Email</Label>
+          <Input 
+            autoCorrect={ false }
+            autoCapitalize="none"
+          />
+        </Item>
+        <Item floatingLabel>
+          <Label>Password</Label>
+          <Input 
+            secureTextEntry={ true }
+            autoCorrect={ false }
+            autoCapitalize="none"
+          />
+        </Item>
+        <Button
+          style={ styles.loginButton }
+          full
+          rounded
+          success
+        >
+          <Text>Login</Text>
+        </Button>
+      </Form>
+    </Container>
   );
 }
 
@@ -32,7 +58,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    padding: 10,
+  },
+  loginButton: {
+    marginTop: 10,
   },
 });
