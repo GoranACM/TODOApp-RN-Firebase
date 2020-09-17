@@ -1,3 +1,11 @@
+/* 
+* Created by: Goran Ilievski
+*
+* September 2020
+*
+* TODOApp
+*/
+
 // Firebase configuration
 export const firebaseConfig = {
     apiKey: "AIzaSyCkSybp2OOO-0vpRylWw5rb_aTDk0Xte1k",
