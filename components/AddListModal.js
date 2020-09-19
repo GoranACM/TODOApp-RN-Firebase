@@ -10,7 +10,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, TextInput } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import colors from '../styles/Colors'
-import tempData from '../tempData'
+//import tempData from '../tempData'
 
 export default class AddListModal extends Component {
 

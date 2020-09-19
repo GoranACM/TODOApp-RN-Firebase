@@ -7,10 +7,9 @@
 */
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Modal, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Modal, ActivityIndicator, YellowBox } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
 import colors from './styles/Colors'
-import tempData from './tempData'
 import TodoList from './components/TodoList'
 import AddListModal from './components/AddListModal'
 import Firebase from './config/firebase'
@@ -25,6 +24,10 @@ export default class App extends Component {
   };
 
   componentDidMount() {
+
+    // Had to suppress the warning as there is no solution still to the problem
+    YellowBox.ignoreWarnings(['Setting a timer']);
+    
     firebase = new Firebase(( error, user ) => {
       if (error) {
         return alert("Oops, something is wrong!")
@@ -53,15 +56,21 @@ export default class App extends Component {
   }
 
   addList = list => {
-    this.setState({lists: [...this.state.lists, { ...list, id: this.state.lists.length + 1, todos: [] }] })
+    firebase.addList({
+      name: list.name,
+      color: list.color,
+      todos: []
+    })
+    // this.setState({lists: [...this.state.lists, { ...list, id: this.state.lists.length + 1, todos: [] }] })
   };
 
   updateList = list => {
-    this.setState({
-      lists: this.state.lists.map(item => {
-        return item.id === list.id ? list : item;
-      })
-    })    
+    firebase.updateList(list);
+    // this.setState({
+    //   lists: this.state.lists.map(item => {
+    //     return item.id === list.id ? list : item;
+    //   })
+    // })    
   }
 
   render(){
@@ -83,9 +92,13 @@ export default class App extends Component {
         >
           <AddListModal closeModal={() => this.toggleAddTodoModal()} addList={ this.addList }/>
         </Modal>
+
+        {/* 
+        This shows the user ID in the app
         <View>
           <Text>User: { this.state.user.uid }</Text>
-        </View>
+        </View> 
+        */}
 
         <View style={ styles.row }>
           <View style={ styles.divider } />
