@@ -7,19 +7,42 @@
 */
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Modal } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Modal, ActivityIndicator } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
 import colors from './styles/Colors'
 import tempData from './tempData'
 import TodoList from './components/TodoList'
 import AddListModal from './components/AddListModal'
+import Firebase from './config/firebase'
 
 export default class App extends Component {
 
   state = {
     addTodoVisible: false,
-    lists: tempData
+    lists: [],
+    user: {},
+    loading: true
   };
+
+  componentDidMount() {
+    firebase = new Firebase(( error, user ) => {
+      if (error) {
+        return alert("Oops, something is wrong!")
+      }
+
+      firebase.getLists(lists => {
+        this.setState({ lists, user }, () => {
+          this.setState({ loading: false })
+        });
+      });
+
+      this.setState({ user })
+    });
+  }
+
+  componentWillUnmount() {
+    firebase.detach();
+  }
 
   toggleAddTodoModal() {
     this.setState({ addTodoVisible: !this.state.addTodoVisible });
@@ -42,6 +65,14 @@ export default class App extends Component {
   }
 
   render(){
+    if (this.state.loading) {
+      return(
+        <View style={ styles.container }>
+          <ActivityIndicator size="large" color={ colors.blue } />
+        </View>
+      )
+    }
+
     return(
       <View style={ styles.container }>
 
@@ -52,6 +83,9 @@ export default class App extends Component {
         >
           <AddListModal closeModal={() => this.toggleAddTodoModal()} addList={ this.addList }/>
         </Modal>
+        <View>
+          <Text>User: { this.state.user.uid }</Text>
+        </View>
 
         <View style={ styles.row }>
           <View style={ styles.divider } />
@@ -71,7 +105,7 @@ export default class App extends Component {
         <View style={ styles.listContainer }>
           <FlatList 
             data={ this.state.lists } 
-            keyExtractor={ item => item.name } 
+            keyExtractor={ item => item.id.toString() } 
             horizontal={ true } 
             showsHorizontalScrollIndicator={ false }
             renderItem={ ({ item }) => this.renderList(item) }
