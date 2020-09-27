@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "TODOApp-RN-Firebase",
-    "slug": "TODOApp-RN-Firebase",
+    "name": "T-D App",
+    "slug": "t-d_app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,6 +21,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Simple To-Do application for creating colour coded lists with tasks using Firebase.",
+    "githubUrl": "https://github.com/GoranACM/TODOApp-RN-Firebase"
   }
 }
