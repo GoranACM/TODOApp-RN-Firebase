@@ -8,7 +8,7 @@
 
 import firebase from 'firebase';
 import "@firebase/firestore";
-import { setAdvertiserIDCollectionEnabledAsync } from 'expo-facebook';
+//import { setAdvertiserIDCollectionEnabledAsync } from 'expo-facebook';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -89,19 +89,22 @@ export default Firebase;
 
 // TODO: Check this for deleting the lists
 
+// In Firebas.js
 // deleteList(list){
 //     let ref = this.ref;
 //     ref.doc(list.id).delete()
 // }
-// this method in App.js
+
+// in App.js
 // deleteList = list => {
-// firebase.deleteList(list);
+//      firebase.deleteList(list);
 // };
 
 // and pass it to TodoList
 // renderList = list => {
-// return <TodoList list={list} updateList={this.updateList} deleteList={this.deleteList}  />
+//      return <TodoList list={list} updateList={this.updateList} deleteList={this.deleteList}  />
 // };
-// in todolist  on Touchable Opacity u can do this
+
+// in todolist on Touchable Opacity
 // onLongPress={() => this.props.deleteList(list)
 // so once any todolist is long pressed it will be deleted
