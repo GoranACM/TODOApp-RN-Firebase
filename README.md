@@ -1,8 +1,13 @@
 # T-D App
+
 ## To-Do Application with Firebase integration
+
 Simple application for creating lists and tasks
+
 ### List of features
+
 - Adding lists
+- Deleting lists
 - List color picker
 - Adding tasks
 - Marking tasks as done
