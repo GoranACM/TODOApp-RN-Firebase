@@ -9,3 +9,5 @@ Simple application for creating lists and tasks
 - Task counter
 - Deleting tasks (Both marked or unmarked)
 - Firebase Firestore DB
+
+### App in action - http://bit.ly/T-DApp
